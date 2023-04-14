@@ -10,8 +10,9 @@ constexpr int WIDTH = 800;
 constexpr int HEIGHT = 600;
 const std::string TITLE = "Tetris 3D";
 
-void error_callback(int error, const char *description);
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods);
+void errorCallback(int error, const char *description);
+void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
+void windowResizeCallback(GLFWwindow *window, int width, int height);
 void initOpenGLProgram(GLFWwindow *window);
 void freeOpenGLProgram(GLFWwindow *window);
 
@@ -68,12 +69,12 @@ int main()
     return 0;
 }
 
-void error_callback(int error, const char *description)
+void errorCallback(int error, const char *description)
 {
     std::cerr << "Error: " << description << std::endl;
 }
 
-void key_callback(GLFWwindow *window, int key, int scancode, int action, int mods)
+void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
 {
     // Close the window if the ESC key was pressed (not released)
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -89,11 +90,18 @@ void initOpenGLProgram(GLFWwindow *window)
     glViewport(0, 0, WIDTH, HEIGHT);
 
     // Set the error callback
-    glfwSetErrorCallback(error_callback);
+    glfwSetErrorCallback(errorCallback);
     // Set the key callback
-    glfwSetKeyCallback(window, key_callback);
+    glfwSetKeyCallback(window, keyCallback);
+    // Set the window resize callback
+    glfwSetWindowSizeCallback(window, windowResizeCallback);
 }
 
 void freeOpenGLProgram(GLFWwindow *window)
 {
+}
+
+void windowResizeCallback(GLFWwindow *window, int width, int height)
+{
+    glViewport(0, 0, width, height);
 }
