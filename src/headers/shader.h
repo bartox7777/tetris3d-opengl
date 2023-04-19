@@ -23,4 +23,6 @@ public:
     ShaderProgram(std::string vertexPath, std::string fragmentPath); // Read and compile shaders from files and create a shader program
     static std::string readFile(std::string filePath);
     void use();
+    GLuint getUniformLocation(std::string uniformName);
+    // GLuint getAttributeLocation(std::string attributeName);
 };

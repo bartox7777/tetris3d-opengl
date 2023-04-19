@@ -1,4 +1,4 @@
-#include "shader.h"
+#include "headers/shader.h"
 
 #include <fstream>
 #include <iostream>
@@ -36,6 +36,16 @@ void ShaderProgram::use()
 {
     glUseProgram(shaderProgramID);
 }
+
+GLuint ShaderProgram::getUniformLocation(std::string uniformName)
+{
+    return glGetUniformLocation(this->shaderProgramID, uniformName.c_str());
+}
+
+// GLuint ShaderProgram::getAttributeLocation(std::string attributeName)
+// {
+//     return glGetAttribLocation(this->shaderProgramID, attributeName.c_str());
+// }
 
 void ShaderProgram::checkCompileErrors(GLuint object, ObjectType type)
 {
