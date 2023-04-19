@@ -1,3 +1,5 @@
+#include "shader.h"
+
 #include <iostream>
 
 #include <GL/glew.h>
@@ -47,6 +49,8 @@ int main()
     }
 
     initOpenGLProgram(window);
+
+    ShaderProgram shader("src/shaders/vertexShader.glsl", "src/shaders/fragmentShader.glsl");
 
     glfwSetTime(0.0);
     while (!glfwWindowShouldClose(window))
