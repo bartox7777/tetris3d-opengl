@@ -1,8 +1,14 @@
 OS: Ubuntu 22.04.2 LTS (wsl)
 gcc version 11.3.0 (Ubuntu 11.3.0-1ubuntu1~22.04)
 
+wsl:
+in powershell: wsl --update
+install ubuntu in windows store
+install these features on windows(start->"turn windows features on or off"): windows subsystem for linux, virtual machine platform
+make sure virtualization in uefi is turned on
+
 export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
-XLaunch # X Server for Windows; check proper working by running xcalc
+https://sourceforge.net/projects/vcxsrv/ ; check proper working by running xcalc and glxinfo should not show error
 
 sudo apt install g++
 sudo apt install make
