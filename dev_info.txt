@@ -16,6 +16,6 @@ export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
 https://sourceforge.net/projects/vcxsrv/ ; check proper working by running xcalc and glxinfo should not show error
 
 make sure to install vsc on windows and install WSL extension
-clone repository in ubuntu and "code tetris3d-opengl/"
+clone repository in ubuntu and use command "code tetris3d-opengl/"
 
-
+use command "make" to compile and run program
