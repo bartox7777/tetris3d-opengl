@@ -10,6 +10,8 @@ make sure virtualization in uefi is turned on
 export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
 https://sourceforge.net/projects/vcxsrv/ ; check proper working by running xcalc and glxinfo should not show error
 
+clone repository in ubuntu and "code tetris3d-opengl/"
+
 sudo apt install g++
 sudo apt install make
 sudo apt-get install mesa-utils libglu1-mesa-dev mesa-common-dev # OpenGL
