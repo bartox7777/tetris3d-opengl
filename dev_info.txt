@@ -1,6 +1,11 @@
 OS: Ubuntu 22.04.2 LTS (wsl)
 gcc version 11.3.0 (Ubuntu 11.3.0-1ubuntu1~22.04)
 
+sudo apt install g++
+sudo apt install make
+sudo apt-get install mesa-utils libglu1-mesa-dev mesa-common-dev # OpenGL
+sudo apt-get install libglew-dev libglfw3-dev # GLFW (managment of windows and events | GLUT alternative) and GLEW (loading OpenGL extensions | GLAD alternative)
+
 wsl:
 in powershell: wsl --update
 install ubuntu in windows store
@@ -10,9 +15,7 @@ make sure virtualization in uefi is turned on
 export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
 https://sourceforge.net/projects/vcxsrv/ ; check proper working by running xcalc and glxinfo should not show error
 
+make sure to install vsc on windows and install WSL extension
 clone repository in ubuntu and "code tetris3d-opengl/"
 
-sudo apt install g++
-sudo apt install make
-sudo apt-get install mesa-utils libglu1-mesa-dev mesa-common-dev # OpenGL
-sudo apt-get install libglew-dev libglfw3-dev # GLFW (managment of windows and events | GLUT alternative) and GLEW (loading OpenGL extensions | GLAD alternative)
+
