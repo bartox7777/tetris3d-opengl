@@ -20,7 +20,7 @@ Camera::Camera(glm::vec3 position, glm::vec3 lookingAtPoint, glm::vec3 upVector,
     // moveVerticalOnCircle(this->angleVertical);
 }
 
-// its not working as it should - very provisory implementation
+// its not working as it should - very provisional implementation
 void Camera::moveHorizontalOnCircle(float angle)
 {
     glm::vec3 newPosition = position;
