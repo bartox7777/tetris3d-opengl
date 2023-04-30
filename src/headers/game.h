@@ -6,13 +6,13 @@
 
 class Game
 {
-public:
-    unsigned int width;
-    unsigned int height;
-    ShaderProgram shaderProgram;
     glm::mat4 perspective;
     glm::mat4 view;
+    unsigned int width;
+    unsigned int height;
 
+public:
     Game(unsigned int width, unsigned int height);
+    ShaderProgram shaderProgram;
     void initialize();
 };

@@ -6,7 +6,6 @@
 
 class ShaderProgram
 {
-private:
     GLuint shaderProgramID;
     GLuint vertexShaderID;
     GLuint fragmentShaderID;
