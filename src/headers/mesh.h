@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 #include "shader.h"
 #include "camera.h"
 
@@ -10,20 +8,20 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <GLFW/glfw3.h>
 
-class Cube
+class Mesh
 {
-
+    int width, height;
     ShaderProgram shaderProgram;
     unsigned int VBO, VAO, EBO;
     glm::mat4 model;
     glm::mat4 view;
     glm::mat4 perspective;
     Camera *camera;
-    glm::vec3 color;
+    glm::vec4 color;
 
 public:
     glm::vec3 position;
 
-    Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm::vec4 color);
+    Mesh(ShaderProgram shaderProgram, Camera *camera, int width, int height);
     void Draw();
 };

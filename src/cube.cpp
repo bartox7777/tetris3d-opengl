@@ -1,9 +1,7 @@
 #include "cube.h"
 
-Cube::Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position) : shaderProgram(shaderProgram), position(position)
+Cube::Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm::vec4 color) : shaderProgram(shaderProgram), position(position), camera(camera), color(color)
 {
-    this->camera = camera;
-
     model = glm::mat4(1.0f);
     view = glm::mat4(1.0f);
     perspective = glm::mat4(1.0f);
@@ -71,12 +69,14 @@ void Cube::Draw()
     glm::mat4 projection = glm::perspective(camera->FOV, camera->aspect, camera->nearPlane, camera->farPlane); // Wylicz macierz rzutowania
     glUniformMatrix4fv(shaderProgram.getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(shaderProgram.getUniformLocation("perspective"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniform4fv(shaderProgram.getUniformLocation("color"), 1, glm::value_ptr(color));
 
-    // model = glm::translate(model, position);
+    model = glm::translate(model, position);
     // model = glm::rotate(model, glm::radians(35.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
     glUniformMatrix4fv(shaderProgram.getUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(model));
 
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+    glBindVertexArray(0);
 }

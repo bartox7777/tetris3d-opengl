@@ -12,9 +12,9 @@ Camera::Camera(glm::vec3 position, glm::vec3 lookingAtPoint, glm::vec3 upVector,
     this->nearPlane = nearPlane;
     this->farPlane = farPlane;
 
-    this->angleHorizontal = 0.0f;
+    this->angleHorizontal = -45.0f;
     this->angleVertical = 0.0f;
-    this->circleRadius = 10.0f;
+    this->circleRadius = 21.0f;
 
     moveHorizontalOnCircle(this->angleHorizontal);
     // moveVerticalOnCircle(this->angleVertical);
@@ -24,15 +24,16 @@ Camera::Camera(glm::vec3 position, glm::vec3 lookingAtPoint, glm::vec3 upVector,
 void Camera::moveHorizontalOnCircle(float angle)
 {
     glm::vec3 newPosition = position;
-    // // std::cout << newPosition.x + sin(angle) << " " << newPosition.z + cos(angle) << std::endl;
+    // std::cout << newPosition.x + sin(angle) << " " << newPosition.z + cos(angle) << std::endl;
     this->angleHorizontal += angle;
     newPosition.x = glm::sin(this->angleHorizontal);
     newPosition.z = glm::cos(this->angleHorizontal);
+    // newPosition = glm::normalize(newPosition);
 
     position.x = newPosition.x * circleRadius;
     position.z = newPosition.z * circleRadius;
-    // position.x = glm::normalize(position).x * circleRadius;
-    // position.z = glm::normalize(position).z * circleRadius;
+    position.x = glm::normalize(position).x * circleRadius;
+    position.z = glm::normalize(position).z * circleRadius;
 }
 
 // void Camera::moveVerticalOnCircle(float angle)
