@@ -1,6 +1,8 @@
 #include "cube.h"
 
-Cube::Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm::vec4 color) : shaderProgram(shaderProgram), position(position), camera(camera), color(color)
+#include <iostream>
+
+Cube::Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm::vec4 color, Mesh *mesh) : shaderProgram(shaderProgram), position(position), camera(camera), color(color), mesh(mesh)
 {
     model = glm::mat4(1.0f);
     view = glm::mat4(1.0f);
@@ -57,7 +59,7 @@ Cube::Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm:
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); // unbind EBO
 }
 
-void Cube::Draw()
+void Cube::draw()
 {
     shaderProgram.use();
     model = glm::mat4(1.0f);
@@ -79,4 +81,17 @@ void Cube::Draw()
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
+}
+
+void Cube::moveDown(float units)
+{
+    if (canMove)
+    {
+        position.y -= units;
+        if (position.y <= (mesh->getMinY() + 1.0f)) // +1.0f bo długość boku kostki to 2.0f, a środek kostki jest środkiem układu współrzędnych modelu
+        {
+            position.y = (mesh->getMinY() + 1.0f);
+            canMove = false;
+        }
+    }
 }

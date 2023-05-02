@@ -4,6 +4,7 @@
 
 #include "shader.h"
 #include "camera.h"
+#include "mesh.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -20,10 +21,12 @@ class Cube
     glm::mat4 perspective;
     Camera *camera;
     glm::vec3 color;
+    Mesh *mesh;
 
 public:
+    Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm::vec4 color, Mesh *mesh);
+    void draw();
+    void moveDown(float units);
+    bool canMove = true;
     glm::vec3 position;
-
-    Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm::vec4 color);
-    void Draw();
 };

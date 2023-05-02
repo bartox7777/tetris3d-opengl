@@ -3,6 +3,7 @@
 #include "headers/cube.h"
 #include "headers/camera.h"
 #include "headers/mesh.h"
+#include "headers/tetracube.h"
 
 #include <iostream>
 
@@ -59,11 +60,14 @@ int main()
     Game Tetris3D(WIDTH, HEIGHT); // here shaders are compiled - is it ok? - be careful with the order of initialization
     Tetris3D.initialize();
 
-    Cube cube(Tetris3D.shaderProgram, &camera, glm::vec3(0.0f, 10.0f, 0.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-    Cube cube2(Tetris3D.shaderProgram, &camera, glm::vec3(2.0f, -10.0f, 0.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-    Mesh mesh(Tetris3D.shaderProgram, &camera, 3, 11);
+    Mesh mesh(Tetris3D.shaderProgram, &camera, 3, 11.5);
+    Tetracube tetracube(Tetris3D.shaderProgram, &camera, &mesh, Tetracube::TYPE::I);
+
+    // Cube cube(Tetris3D.shaderProgram, &camera, glm::vec3(0.0f, 10.0f, 0.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), &mesh);
+    // Cube cube2(Tetris3D.shaderProgram, &camera, glm::vec3(0.0f, -10.0f, 0.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), &mesh);
 
     glfwSetTime(0.0);
+    float time = 0.0f;
     while (!glfwWindowShouldClose(window))
     {
         glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
@@ -72,13 +76,23 @@ int main()
         // process input
 
         // update the game
+        time += glfwGetTime();
 
         // render the game
         glfwSetTime(0.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        cube.Draw();
-        cube2.Draw();
-        mesh.Draw();
+
+        mesh.draw();
+        tetracube.draw();
+        tetracube.blockCubes();
+
+        if (time >= 0.5f)
+        {
+            // cube.moveDown(2);
+            // cube2.moveDown(2);
+            tetracube.moveDown(1);
+            time = 0.0f;
+        }
 
         // camera.moveVerticalOnCircle(glfwGetTime());
         // std::cout << glm::to_string(camera.position) << " ";

@@ -10,7 +10,6 @@
 
 class Mesh
 {
-    int width, height;
     ShaderProgram shaderProgram;
     unsigned int VBO, VAO, EBO;
     glm::mat4 model;
@@ -20,8 +19,9 @@ class Mesh
     glm::vec4 color;
 
 public:
-    glm::vec3 position;
+    const int width, height;
 
     Mesh(ShaderProgram shaderProgram, Camera *camera, int width, int height);
-    void Draw();
+    void draw();
+    int getMinY();
 };

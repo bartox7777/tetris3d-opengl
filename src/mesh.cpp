@@ -30,7 +30,7 @@ Mesh::Mesh(ShaderProgram shaderProgram, Camera *camera, int width, int height) :
     glBindVertexArray(0);             // unbind VAO
 }
 
-void Mesh::Draw()
+void Mesh::draw()
 {
     shaderProgram.use();
     model = glm::mat4(1.0f);
@@ -117,4 +117,9 @@ void Mesh::Draw()
     }
 
     glBindVertexArray(0);
+}
+
+int Mesh::getMinY()
+{
+    return -height;
 }
