@@ -95,3 +95,52 @@ void Cube::moveDown(float units)
         }
     }
 }
+
+void Cube::moveLeft(float units)
+{
+    if (canMove)
+    {
+
+        position.x += units;
+        if (position.x >= (mesh->getMaxX() - 1.0f))
+        {
+            position.x = (mesh->getMaxX() - 1.0f);
+        }
+    }
+}
+
+void Cube::moveRight(float units)
+{
+    if (canMove)
+    {
+        position.x -= units;
+        if (position.x <= (mesh->getMinX() + 1.0f))
+        {
+            position.x = (mesh->getMinX() + 1.0f);
+        }
+    }
+}
+
+void Cube::moveForward(float units)
+{
+    if (canMove)
+    {
+        position.z += units;
+        if (position.z >= (mesh->getMaxZ() - 1.0f))
+        {
+            position.z = (mesh->getMaxZ() - 1.0f);
+        }
+    }
+}
+
+void Cube::moveBackward(float units)
+{
+    if (canMove)
+    {
+        position.z -= units;
+        if (position.z <= (mesh->getMinZ() + 1.0f))
+        {
+            position.z = (mesh->getMinZ() + 1.0f);
+        }
+    }
+}

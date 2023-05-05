@@ -123,3 +123,23 @@ int Mesh::getMinY()
 {
     return -height;
 }
+
+int Mesh::getMaxX()
+{
+    return width;
+}
+
+int Mesh::getMinX()
+{
+    return -width;
+}
+
+int Mesh::getMaxZ()
+{
+    return width;
+}
+
+int Mesh::getMinZ()
+{
+    return -width;
+}

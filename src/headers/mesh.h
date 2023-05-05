@@ -24,4 +24,8 @@ public:
     Mesh(ShaderProgram shaderProgram, Camera *camera, int width, int height);
     void draw();
     int getMinY();
+    int getMinX();
+    int getMaxX();
+    int getMaxZ();
+    int getMinZ();
 };

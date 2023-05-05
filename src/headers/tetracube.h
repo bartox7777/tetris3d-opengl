@@ -22,6 +22,10 @@ public:
     Tetracube(ShaderProgram shaderProgram, Camera *camera, Mesh *mesh, TYPE type);
     void draw();
     void moveDown(float units);
-    void blockCubes();
+    void moveLeft(float units);
+    void moveRight(float units);
+    void moveForward(float units);
+    void moveBackward(float units);
+    void blockCubesOnBottom();
     ~Tetracube();
 };

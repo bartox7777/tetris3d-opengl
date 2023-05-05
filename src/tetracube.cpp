@@ -5,9 +5,9 @@ Tetracube::Tetracube(ShaderProgram shaderProgram, Camera *camera, Mesh *mesh, TY
     switch (type)
     {
     case TYPE::I:
-        cubes.push_back(new Cube(shaderProgram, camera, glm::vec3(0.0f, mesh->height, 0.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), mesh));
-        cubes.push_back(new Cube(shaderProgram, camera, glm::vec3(0.0f, mesh->height + 2, 0.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), mesh));
-        cubes.push_back(new Cube(shaderProgram, camera, glm::vec3(0.0f, mesh->height + 4, 0.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), mesh));
+        cubes.push_back(new Cube(shaderProgram, camera, glm::vec3(0.0f, mesh->height - 1, 2.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), mesh));
+        cubes.push_back(new Cube(shaderProgram, camera, glm::vec3(0.0f, mesh->height + 1, 2.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), mesh));
+        cubes.push_back(new Cube(shaderProgram, camera, glm::vec3(0.0f, mesh->height + 3, 2.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), mesh));
         break;
     }
 }
@@ -28,6 +28,38 @@ void Tetracube::moveDown(float units)
     }
 }
 
+void Tetracube::moveLeft(float units)
+{
+    for (auto cube : cubes)
+    {
+        cube->moveLeft(units);
+    }
+}
+
+void Tetracube::moveRight(float units)
+{
+    for (auto cube : cubes)
+    {
+        cube->moveRight(units);
+    }
+}
+
+void Tetracube::moveForward(float units)
+{
+    for (auto cube : cubes)
+    {
+        cube->moveForward(units);
+    }
+}
+
+void Tetracube::moveBackward(float units)
+{
+    for (auto cube : cubes)
+    {
+        cube->moveBackward(units);
+    }
+}
+
 Tetracube::~Tetracube()
 {
     for (auto cube : cubes)
@@ -37,7 +69,7 @@ Tetracube::~Tetracube()
     cubes.clear();
 }
 
-void Tetracube::blockCubes() // if one cube can't move, none of them can
+void Tetracube::blockCubesOnBottom() // if one cube can't move, none of them can
 {
     for (auto cube1 : cubes)
     {
@@ -47,6 +79,7 @@ void Tetracube::blockCubes() // if one cube can't move, none of them can
             {
                 cube2->canMove = false;
             }
+            break;
         }
     }
 }

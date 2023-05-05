@@ -27,6 +27,10 @@ public:
     Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm::vec4 color, Mesh *mesh);
     void draw();
     void moveDown(float units);
+    void moveLeft(float units);
+    void moveRight(float units);
+    void moveForward(float units);
+    void moveBackward(float units);
     bool canMove = true;
     glm::vec3 position;
 };
