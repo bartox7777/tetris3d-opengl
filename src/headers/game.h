@@ -19,10 +19,11 @@ class Game
         LOSS
     };
     std::vector<Tetracube *> tetracubes;
-    Mesh *mesh;
+    
     float time;
 
 public:
+    Mesh *mesh;
     Game(Camera *camera);
     ShaderProgram *shaderProgram;
     Camera *camera;

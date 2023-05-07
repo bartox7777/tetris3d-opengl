@@ -34,7 +34,7 @@ void Game::update(float dt)
     }
 
     time += dt;
-    if (time >= 1.0f)
+    if (time >= 0.1f)
     {
         time = 0.0f;
         for (auto tetracube : tetracubes)

@@ -5,8 +5,8 @@ Tetracube::Tetracube(ShaderProgram shaderProgram, Camera *camera, Mesh *mesh, TY
     switch (type)
     {
     case TYPE::I:
-        cubes.push_back(new Cube(shaderProgram, camera, glm::vec3(0.0f, mesh->height - 1, 2.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), mesh));
-        cubes.push_back(new Cube(shaderProgram, camera, glm::vec3(0.0f, mesh->height + 1, 2.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), mesh));
+        // cubes.push_back(new Cube(shaderProgram, camera, glm::vec3(0.0f, mesh->height - 1, 2.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), mesh));
+        // cubes.push_back(new Cube(shaderProgram, camera, glm::vec3(0.0f, mesh->height + 1, 2.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), mesh));
         cubes.push_back(new Cube(shaderProgram, camera, glm::vec3(0.0f, mesh->height + 3, 2.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), mesh));
         break;
     }

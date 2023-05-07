@@ -24,6 +24,7 @@ class Cube
     Mesh *mesh;
 
 public:
+    unsigned int texture;
     Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm::vec4 color, Mesh *mesh);
     void draw();
     void moveDown(float units);

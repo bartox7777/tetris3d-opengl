@@ -61,6 +61,8 @@ int main()
 
     Tetris3D.initialize();
 
+    // Cube cube(*Tetris3D.shaderProgram, &camera, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), Tetris3D.mesh);
+
     glfwSetTime(0.0);
     while (!glfwWindowShouldClose(window))
     {
@@ -70,13 +72,14 @@ int main()
         // process input
 
         // update the game
-        Tetris3D.update(glfwGetTime());
+        // Tetris3D.update(glfwGetTime());
 
         // render the game
         glfwSetTime(0.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         Tetris3D.draw();
+        // cube.draw();
 
         glfwSwapBuffers(window);
     }
