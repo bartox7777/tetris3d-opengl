@@ -5,8 +5,7 @@
 
 class Tetracube // unnecessary tetra- prefix, but I can't think of a better name
 {
-
-    std::vector<Cube *> cubes;
+    bool canMove;
 
 public:
     enum TYPE
@@ -19,6 +18,9 @@ public:
         L,
         l
     };
+    std::vector<Cube *> cubes;
+    void setCanMove(bool canMove);
+    bool getCanMove();
     Tetracube(ShaderProgram shaderProgram, Camera *camera, Mesh *mesh, TYPE type);
     void draw();
     void moveDown(float units);

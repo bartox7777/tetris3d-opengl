@@ -72,7 +72,7 @@ int main()
         // process input
 
         // update the game
-        // Tetris3D.update(glfwGetTime());
+        Tetris3D.update(glfwGetTime());
 
         // render the game
         glfwSetTime(0.0);
