@@ -42,7 +42,7 @@ void Mesh::draw()
     glm::mat4 projection = glm::perspective(camera->FOV, camera->aspect, camera->nearPlane, camera->farPlane); // Wylicz macierz rzutowania
     glUniformMatrix4fv(shaderProgram.getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(shaderProgram.getUniformLocation("perspective"), 1, GL_FALSE, glm::value_ptr(projection));
-    glUniform4fv(shaderProgram.getUniformLocation("color"), 1, glm::value_ptr(color));
+    glUniform4fv(shaderProgram.getUniformLocation("ocolor"), 1, glm::value_ptr(color));
 
     glBindVertexArray(VAO);
 

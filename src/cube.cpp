@@ -11,49 +11,192 @@ Cube::Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm:
     view = glm::mat4(1.0f);
     perspective = glm::mat4(1.0f);
 
-    float vertices[] = {
-        // 3d cube
-        1.0f, 1.0f, 1.0f, color.x, color.y, color.z, color.w, 1.0f, 1.0f,    // front right top
-        1.0f, -1.0f, 1.0f, color.x, color.y, color.z, color.w, 1.0f, 0.0f,   // front right bottom
-        -1.0f, -1.0f, 1.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f,  // front left bottom
-        -1.0f, 1.0f, 1.0f, color.x, color.y, color.z, color.w, 0.0f, 1.0f,   // front left top
-        1.0f, 1.0f, -1.0f, color.x, color.y, color.z, color.w, 0.0f, 1.0f,   // back right top
-        1.0f, -1.0f, -1.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f,  // back right bottom
-        -1.0f, -1.0f, -1.0f, color.x, color.y, color.z, color.w, 1.0f, 0.0f, // back left bottom
-        -1.0f, 1.0f, -1.0f, color.x, color.y, color.z, color.w, 1.0f, 1.0f,  // back left top
+    // float vertices[] = {
+    //     // 3d cube
+    //     1.0f, 1.0f, 1.0f, color.x, color.y, color.z, color.w, 1.0f, 1.0f,    // front right top
+    //     1.0f, -1.0f, 1.0f, color.x, color.y, color.z, color.w, 1.0f, 0.0f,   // front right bottom
+    //     -1.0f, -1.0f, 1.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f,  // front left bottom
+    //     -1.0f, 1.0f, 1.0f, color.x, color.y, color.z, color.w, 0.0f, 1.0f,   // front left top
+    //     1.0f, 1.0f, -1.0f, color.x, color.y, color.z, color.w, 0.0f, 1.0f,   // back right top
+    //     1.0f, -1.0f, -1.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f,  // back right bottom
+    //     -1.0f, -1.0f, -1.0f, color.x, color.y, color.z, color.w, 1.0f, 0.0f, // back left bottom
+    //     -1.0f, 1.0f, -1.0f, color.x, color.y, color.z, color.w, 1.0f, 1.0f,  // back left top
 
-        1.0f, 1.0f, 1.0f, color.x, color.y, color.z, color.w, 1.0f, 1.0f, // front right top
+    //     1.0f, 1.0f, 1.0f, color.x, color.y, color.z, color.w, 1.0f, 1.0f, // front right top
 
-        1.0f, -1.0f, 1.0f, color.x, color.y, color.z, color.w, 1.0f, 1.0f,  // front right bottom
-        -1.0f, -1.0f, 1.0f, color.x, color.y, color.z, color.w, 0.0f, 1.0f, // front left bottom
+    //     1.0f, -1.0f, 1.0f, color.x, color.y, color.z, color.w, 1.0f, 1.0f,  // front right bottom
+    //     -1.0f, -1.0f, 1.0f, color.x, color.y, color.z, color.w, 0.0f, 1.0f, // front left bottom
 
-        -1.0f, 1.0f, 1.0f, color.x, color.y, color.z, color.w, 0.0f, 1.0f, // front left top
-        1.0f, 1.0f, -1.0f, color.x, color.y, color.z, color.w, 1.0f, 0.0f, // back right top
+    //     -1.0f, 1.0f, 1.0f, color.x, color.y, color.z, color.w, 0.0f, 1.0f, // front left top
+    //     1.0f, 1.0f, -1.0f, color.x, color.y, color.z, color.w, 1.0f, 0.0f, // back right top
 
-        1.0f, -1.0f, -1.0f, color.x, color.y, color.z, color.w, 1.0f, 0.0f,  // back right bottom
-        -1.0f, -1.0f, -1.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f, // back left bottom
+    //     1.0f, -1.0f, -1.0f, color.x, color.y, color.z, color.w, 1.0f, 0.0f,  // back right bottom
+    //     -1.0f, -1.0f, -1.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f, // back left bottom
 
-        -1.0f, 1.0f, -1.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f, // back left top
+    //     -1.0f, 1.0f, -1.0f, color.x, color.y, color.z, color.w, 0.0f, 0.0f, // back left top
+    // };
+
+    float vertices[]={
+				1.0f,-1.0f,-1.0f,1.0f,
+				-1.0f, 1.0f,-1.0f,1.0f,
+				-1.0f,-1.0f,-1.0f,1.0f,
+
+				1.0f,-1.0f,-1.0f,1.0f,
+				1.0f, 1.0f,-1.0f,1.0f,
+				-1.0f, 1.0f,-1.0f,1.0f,
+
+
+				-1.0f,-1.0f, 1.0f,1.0f,
+				1.0f, 1.0f, 1.0f,1.0f,
+				1.0f,-1.0f, 1.0f,1.0f,
+
+				-1.0f,-1.0f, 1.0f,1.0f,
+				-1.0f, 1.0f, 1.0f,1.0f,
+				1.0f, 1.0f, 1.0f,1.0f,
+
+				1.0f,-1.0f, 1.0f,1.0f,
+				1.0f, 1.0f,-1.0f,1.0f,
+				1.0f,-1.0f,-1.0f,1.0f,
+
+				1.0f,-1.0f, 1.0f,1.0f,
+				1.0f, 1.0f, 1.0f,1.0f,
+				1.0f, 1.0f,-1.0f,1.0f,
+
+				-1.0f,-1.0f,-1.0f,1.0f,
+				-1.0f, 1.0f, 1.0f,1.0f,
+				-1.0f,-1.0f, 1.0f,1.0f,
+
+				-1.0f,-1.0f,-1.0f,1.0f,
+				-1.0f, 1.0f,-1.0f,1.0f,
+				-1.0f, 1.0f, 1.0f,1.0f,
+
+				-1.0f,-1.0f,-1.0f,1.0f,
+				1.0f,-1.0f, 1.0f,1.0f,
+				1.0f,-1.0f,-1.0f,1.0f,
+
+				-1.0f,-1.0f,-1.0f,1.0f,
+				-1.0f,-1.0f, 1.0f,1.0f,
+				1.0f,-1.0f, 1.0f,1.0f,
+
+				-1.0f, 1.0f, 1.0f,1.0f,
+				1.0f, 1.0f,-1.0f,1.0f,
+				1.0f, 1.0f, 1.0f,1.0f,
+
+				-1.0f, 1.0f, 1.0f,1.0f,
+				-1.0f, 1.0f,-1.0f,1.0f,
+				1.0f, 1.0f,-1.0f,1.0f,
+
+			};
+
+    float vertexNormals[]={
+				1.0f,-1.0f,-1.0f,0.0f,
+				-1.0f, 1.0f,-1.0f,0.0f,
+				-1.0f,-1.0f,-1.0f,0.0f,
+
+				1.0f,-1.0f,-1.0f,0.0f,
+				1.0f, 1.0f,-1.0f,0.0f,
+				-1.0f, 1.0f,-1.0f,0.0f,
+
+
+				-1.0f,-1.0f, 1.0f,0.0f,
+				1.0f, 1.0f, 1.0f,0.0f,
+				1.0f,-1.0f, 1.0f,0.0f,
+
+				-1.0f,-1.0f, 1.0f,0.0f,
+				-1.0f, 1.0f, 1.0f,0.0f,
+				1.0f, 1.0f, 1.0f,0.0f,
+
+				1.0f,-1.0f, 1.0f,0.0f,
+				1.0f, 1.0f,-1.0f,0.0f,
+				1.0f,-1.0f,-1.0f,0.0f,
+
+				1.0f,-1.0f, 1.0f,0.0f,
+				1.0f, 1.0f, 1.0f,0.0f,
+				1.0f, 1.0f,-1.0f,0.0f,
+
+				-1.0f,-1.0f,-1.0f,0.0f,
+				-1.0f, 1.0f, 1.0f,0.0f,
+				-1.0f,-1.0f, 1.0f,0.0f,
+
+				-1.0f,-1.0f,-1.0f,0.0f,
+				-1.0f, 1.0f,-1.0f,0.0f,
+				-1.0f, 1.0f, 1.0f,0.0f,
+
+				-1.0f,-1.0f,-1.0f,0.0f,
+				1.0f,-1.0f, 1.0f,0.0f,
+				1.0f,-1.0f,-1.0f,0.0f,
+
+				-1.0f,-1.0f,-1.0f,0.0f,
+				-1.0f,-1.0f, 1.0f,0.0f,
+				1.0f,-1.0f, 1.0f,0.0f,
+
+				-1.0f, 1.0f, 1.0f,0.0f,
+				1.0f, 1.0f,-1.0f,0.0f,
+				1.0f, 1.0f, 1.0f,0.0f,
+
+				-1.0f, 1.0f, 1.0f,0.0f,
+				-1.0f, 1.0f,-1.0f,0.0f,
+				1.0f, 1.0f,-1.0f,0.0f,
+			};
+
+    float texCoords[]={
+        1.0f,1.0f, 0.0f,0.0f, 0.0f,1.0f,
+        1.0f,1.0f, 1.0f,0.0f, 0.0f,0.0f,
+
+        1.0f,1.0f, 0.0f,0.0f, 0.0f,1.0f,
+        1.0f,1.0f, 1.0f,0.0f, 0.0f,0.0f,
+
+        1.0f,1.0f, 0.0f,0.0f, 0.0f,1.0f,
+        1.0f,1.0f, 1.0f,0.0f, 0.0f,0.0f,
+
+        1.0f,1.0f, 0.0f,0.0f, 0.0f,1.0f,
+        1.0f,1.0f, 1.0f,0.0f, 0.0f,0.0f,
+
+        1.0f,1.0f, 0.0f,0.0f, 0.0f,1.0f,
+        1.0f,1.0f, 1.0f,0.0f, 0.0f,0.0f,
+
+        1.0f,1.0f, 0.0f,0.0f, 0.0f,1.0f,
+        1.0f,1.0f, 1.0f,0.0f, 0.0f,0.0f,
     };
-    unsigned int indices[] = {
-        // front
-        0, 1, 3,
-        1, 2, 3,
-        // right
-        0, 4, 1,
-        1, 4, 5,
-        // back
-        4, 7, 5,
-        5, 7, 6,
-        // left
-        7, 3, 6,
-        6, 3, 2,
-        // top
-        7 + 8, 4 + 8, 0 + 8,
-        7 + 8, 0 + 8, 3 + 8,
-        // bottom
-        1 + 8, 5 + 8, 2 + 8,
-        2 + 8, 5 + 8, 6 + 8};
+
+    float combined[36*(4+4+3)];
+    int k = 0;
+    for (int i=0; i<36; i++){
+        for (int j=0; j<4; j++){
+            combined[k++]=vertices[i*4+j];
+        }
+        for (int j=0; j<4; j++){
+            combined[k++] = vertexNormals[i*4+j];
+        }
+        for (int j=0; j<2; j++){
+            combined[k++] = texCoords[i*2+j];
+        }
+
+    }
+
+    // unsigned int indices[] = {
+    //     // front
+    //     0, 1, 3,
+    //     1, 2, 3,
+    //     // right
+    //     0, 4, 1,
+    //     1, 4, 5,
+    //     // back
+    //     4, 7, 5,
+    //     5, 7, 6,
+    //     // left
+    //     7, 3, 6,
+    //     6, 3, 2,
+    //     // top
+    //     7 + 8, 4 + 8, 0 + 8,
+    //     7 + 8, 0 + 8, 3 + 8,
+    //     // bottom
+    //     1 + 8, 5 + 8, 2 + 8,
+    //     2 + 8, 5 + 8, 6 + 8};
+    unsigned int indices[36];
+    for (int i=0; i<36; i++){
+        indices[i]=i;
+    }
 
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -62,18 +205,18 @@ Cube::Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm:
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(combined), combined, GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void *)0);
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
 
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void *)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void *)(4 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (void *)(7 * sizeof(float)));
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void *)(8 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
     glGenTextures(1, &texture);
@@ -114,7 +257,7 @@ void Cube::draw()
     glm::mat4 projection = glm::perspective(camera->FOV, camera->aspect, camera->nearPlane, camera->farPlane); // Wylicz macierz rzutowania
     glUniformMatrix4fv(shaderProgram.getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(shaderProgram.getUniformLocation("perspective"), 1, GL_FALSE, glm::value_ptr(projection));
-    // glUniform4fv(shaderProgram.getUniformLocation("color"), 1, glm::value_ptr(color));
+    glUniform4fv(shaderProgram.getUniformLocation("ocolor"), 1, glm::value_ptr(color));
 
     model = glm::translate(model, position);
     // model = glm::rotate(model, glm::radians(35.0f), glm::vec3(1.0f, 0.0f, 0.0f));
