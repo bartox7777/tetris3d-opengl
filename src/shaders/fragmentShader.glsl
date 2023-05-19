@@ -32,6 +32,6 @@ void main() {
 
     vec4 c = mix(texture(texture1, otexCoord), ocolor, 0.2);
 
-    color = vec4(c.rgb * nl, c.a) + vec4(vec3(rv), 0);
+    color = vec4(c.rgb * nl, c.a) + vec4(vec3(rv)*0.2, 0);
     // color = ocolor;
 }
