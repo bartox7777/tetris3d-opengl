@@ -25,7 +25,7 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 void initOpenGLProgram(GLFWwindow *window);
 void freeOpenGLProgram(GLFWwindow *window);
 
-Camera camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, (float)WIDTH / (float)HEIGHT, 0.1f, 50.0f);
+Camera camera(glm::vec3(-5.0f, 5.0f, -5.0f), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, (float)WIDTH / (float)HEIGHT, 0.1f, 50.0f);
 Game Tetris3D(&camera);
 
 int main()
@@ -66,7 +66,7 @@ int main()
     glfwSetTime(0.0);
     while (!glfwWindowShouldClose(window))
     {
-        glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+        glClearColor(0.53f, 0.81f, 0.92f, 1.0f);
         glfwPollEvents(); // process events in the queue and call the callbacks
 
         // process input

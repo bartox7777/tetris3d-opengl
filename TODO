@@ -1,6 +1,8 @@
 Wymagania ogólne:
     ✔ Scena zawiera kilka obiektów trójwymiarowych poruszających się niezależnie @done(23-05-08 23:41)
     ✔ Interakcja z użytkownikiem @done(23-05-08 23:41)
-    ☐ Wykorzystano conajmniej dwie różne tekstury
-    ☐ Scena jest oświetlona z przynajmniej dwóch źródeł światła. Cieniowanie powinno być widoczne
-    ☐ Nietrywialne modele 3D
+    ✔ Wykorzystano conajmniej dwie różne tekstury @done(23-05-20 16:09)
+    ✔ Scena jest oświetlona z przynajmniej dwóch źródeł światła. Cieniowanie powinno być widoczne @done(23-05-20 16:09)
+    ✔ Nietrywialne modele 3D @done(23-05-20 16:09)
+    ☐ Poruszanie kamerą do naprawy - obecnie fuszerka
+    ☐ Prawidłowe działanie gry

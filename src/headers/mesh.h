@@ -19,6 +19,8 @@ class Mesh
     glm::vec4 color;
 
 public:
+    friend class Base;
+
     const int width, height;
 
     Mesh(ShaderProgram shaderProgram, Camera *camera, int width, int height);

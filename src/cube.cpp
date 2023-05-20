@@ -408,9 +408,10 @@ Cube::Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm:
         0.0f,
     };
 
-    float combined[36 * (4 + 4 + 3)];
+    float combined[verticesCount * (4 + 4 + 3)];
+
     int k = 0;
-    for (int i = 0; i < 36; i++)
+    for (int i = 0; i < verticesCount; i++)
     {
         for (int j = 0; j < 4; j++)
         {
@@ -426,8 +427,8 @@ Cube::Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm:
         }
     }
 
-    unsigned int indices[36];
-    for (int i = 0; i < 36; i++)
+    unsigned int indices[verticesCount];
+    for (int i = 0; i < verticesCount; i++)
     {
         indices[i] = i;
     }
@@ -453,9 +454,9 @@ Cube::Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm:
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void *)(8 * sizeof(float)));
     glEnableVertexAttribArray(2);
 
+    glActiveTexture(GL_TEXTURE0);
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
-    glActiveTexture(GL_TEXTURE0);
 
     int width, height, nrChannels;
     unsigned char *data = stbi_load("textures/container.jpg", &width, &height, &nrChannels, 0);
@@ -471,7 +472,6 @@ Cube::Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm:
     stbi_image_free(data);
 
     shaderProgram.use();
-    glUniform1i(shaderProgram.getUniformLocation("texture1"), 0);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);         // unbind VBO
     glBindVertexArray(0);                     // unbind VAO
@@ -482,6 +482,9 @@ void Cube::draw()
 {
 
     shaderProgram.use();
+
+    glUniform1i(shaderProgram.getUniformLocation("texture1"), 0);
+
     model = glm::mat4(1.0f);
     glm::mat4 view = glm::lookAt(
         camera->position,
@@ -500,7 +503,7 @@ void Cube::draw()
 
     glBindVertexArray(VAO);
 
-    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, verticesCount, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }
 

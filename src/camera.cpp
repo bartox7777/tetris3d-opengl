@@ -14,7 +14,7 @@ Camera::Camera(glm::vec3 position, glm::vec3 lookingAtPoint, glm::vec3 upVector,
 
     this->angleHorizontal = -45.0f;
     // this->angleVertical = 0.0f;
-    this->circleRadius = 21.0f;
+    this->circleRadius = 30.0f;
 
     moveHorizontalOnCircle(this->angleHorizontal);
     // moveVerticalOnCircle(this->angleVertical);

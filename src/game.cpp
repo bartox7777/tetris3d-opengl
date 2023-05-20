@@ -14,12 +14,14 @@ void Game::initialize()
 {
     shaderProgram = new ShaderProgram("./src/shaders/vertexShader.glsl", "./src/shaders/fragmentShader.glsl");
     mesh = new Mesh(*shaderProgram, camera, 3, 12);
+    base = new Base(*shaderProgram, camera, mesh);
     tetracubes.push_back(new Tetracube(*shaderProgram, camera, mesh, Tetracube::TYPE::I));
 }
 
 void Game::draw()
 {
     mesh->draw();
+    base->draw();
     for (auto tetracube : tetracubes)
     {
         tetracube->draw();

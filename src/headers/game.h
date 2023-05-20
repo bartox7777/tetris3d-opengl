@@ -3,6 +3,7 @@
 #include "shader.h"
 #include "tetracube.h"
 #include "mesh.h"
+#include "base.h"
 
 #include <glm/glm.hpp>
 #include <vector>
@@ -19,11 +20,12 @@ class Game
         LOSS
     };
     std::vector<Tetracube *> tetracubes;
-    
+
     float time;
 
 public:
     Mesh *mesh;
+    Base *base;
     Game(Camera *camera);
     ShaderProgram *shaderProgram;
     Camera *camera;
