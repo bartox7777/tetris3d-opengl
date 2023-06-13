@@ -19,14 +19,14 @@ class Cube
     glm::mat4 model;
     glm::mat4 view;
     glm::mat4 perspective;
-    Camera *camera;
+    Camera &camera;
     glm::vec3 color;
     Mesh *mesh;
     unsigned verticesCount = 36;
 
 public:
     unsigned int texture;
-    Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm::vec4 color, Mesh *mesh);
+    Cube(ShaderProgram shaderProgram, Camera &camera, glm::vec3 position, glm::vec4 color, Mesh *mesh);
     void draw();
     void moveDown(float units);
     void moveLeft(float units);

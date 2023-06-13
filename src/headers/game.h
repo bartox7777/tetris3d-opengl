@@ -26,9 +26,9 @@ class Game
 public:
     Mesh *mesh;
     Base *base;
-    Game(Camera *camera);
+    Game(Camera &camera);
     ShaderProgram *shaderProgram;
-    Camera *camera;
+    Camera &camera;
     void initialize();
     void draw();
     void update(float dt);

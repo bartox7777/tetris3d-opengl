@@ -5,7 +5,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-Cube::Cube(ShaderProgram shaderProgram, Camera *camera, glm::vec3 position, glm::vec4 color, Mesh *mesh) : shaderProgram(shaderProgram), position(position), camera(camera), color(color), mesh(mesh)
+Cube::Cube(ShaderProgram shaderProgram, Camera &camera, glm::vec3 position, glm::vec4 color, Mesh *mesh) : shaderProgram(shaderProgram), position(position), camera(camera), color(color), mesh(mesh)
 {
     model = glm::mat4(1.0f);
     view = glm::mat4(1.0f);
@@ -486,12 +486,9 @@ void Cube::draw()
     glUniform1i(shaderProgram.getUniformLocation("texture1"), 0);
 
     model = glm::mat4(1.0f);
-    glm::mat4 view = glm::lookAt(
-        camera->position,
-        camera->lookingAtPoint,
-        camera->upVector); // Wylicz macierz widoku
+    glm::mat4 view =camera.GetViewMatrix(); // Wylicz macierz widoku
 
-    glm::mat4 projection = glm::perspective(camera->FOV, camera->aspect, camera->nearPlane, camera->farPlane); // Wylicz macierz rzutowania
+    glm::mat4 projection = camera.GetProjectionMatrix(); // Wylicz macierz rzutowania
     glUniformMatrix4fv(shaderProgram.getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(shaderProgram.getUniformLocation("perspective"), 1, GL_FALSE, glm::value_ptr(projection));
     glUniform4fv(shaderProgram.getUniformLocation("ocolor"), 1, glm::value_ptr(color));

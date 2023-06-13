@@ -21,16 +21,20 @@ const std::string TITLE = "Tetris 3D";
 
 void errorCallback(int error, const char *description);
 void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods);
+void mouseCallback(GLFWwindow *window, double xpos, double ypos);
+void processOffset(double xpos, double ypos);
 // void windowResizeCallback(GLFWwindow *window, int width, int height);
 void initOpenGLProgram(GLFWwindow *window);
 void freeOpenGLProgram(GLFWwindow *window);
 
-Camera camera(glm::vec3(-5.0f, 5.0f, -5.0f), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, (float)WIDTH / (float)HEIGHT, 0.1f, 50.0f);
-Game Tetris3D(&camera);
+
+Camera camera(glm::vec3(-10.0f, 21.0f, -11.0f), glm::vec3(0.0f, 1.0f, 0.0f), 45.0f, (float)WIDTH / (float)HEIGHT, 49.0f, -52.0f, 0.1f, 50.0f);
+Game Tetris3D(camera);
 
 int main()
 {
     // Initialize GLFW
+    glfwSetErrorCallback(errorCallback);
     if (!glfwInit())
     {
         std::cerr << "Failed to initialize GLFW" << std::endl;
@@ -81,6 +85,33 @@ int main()
         Tetris3D.draw();
         // cube.draw();
 
+        // Move forward
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        {
+            camera.ProcessKeyboard(Camera_Movement::FORWARD, glfwGetTime());
+        }
+        // Move backward
+        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        {
+            camera.ProcessKeyboard(Camera_Movement::BACKWARD, glfwGetTime());
+        }
+        // Strafe right
+        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        {
+            camera.ProcessKeyboard(Camera_Movement::RIGHT, glfwGetTime());
+        }
+        // Strafe left
+        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        {
+            camera.ProcessKeyboard(Camera_Movement::LEFT, glfwGetTime());
+        }
+
+        std::cout << "Camera lookat: " << glm::to_string(camera.Front+camera.Position) << std::endl;
+        std::cout << "Camera position: " << glm::to_string(camera.Position) << std::endl;
+        std::cout << "Camera Front: " << glm::to_string(camera.Front) << std::endl;
+        std::cout << "Camera Yaw: " << camera.Yaw << std::endl;
+        std::cout << "Camera Pitch: " << camera.Pitch << std::endl;
+
         glfwSwapBuffers(window);
     }
 
@@ -102,28 +133,54 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
     {
         glfwSetWindowShouldClose(window, GL_TRUE);
     }
-    if (key == GLFW_KEY_D && (action == GLFW_PRESS || action == GLFW_REPEAT))
-    {
-        camera.moveHorizontalOnCircle(10.0f * glfwGetTime());
-    }
-    if (key == GLFW_KEY_A && (action == GLFW_PRESS || action == GLFW_REPEAT))
-    {
-        camera.moveHorizontalOnCircle(-10.0f * glfwGetTime());
-    }
-    if (key == GLFW_KEY_W && (action == GLFW_PRESS || action == GLFW_REPEAT))
-    {
-        camera.circleRadius -= 0.1f;
-        camera.moveHorizontalOnCircle(0.0f);
-    }
-    if (key == GLFW_KEY_S && (action == GLFW_PRESS || action == GLFW_REPEAT))
-    {
-        camera.circleRadius += 0.1f;
-        camera.moveHorizontalOnCircle(0.0f);
-    }
+    // if (key == GLFW_KEY_D && (action == GLFW_PRESS || action == GLFW_REPEAT))
+    // {
+    //     camera.processkeyboard(Camera::Movement::RIGHT, glfwGetTime());
+    // }
+    // if (key == GLFW_KEY_A && (action == GLFW_PRESS || action == GLFW_REPEAT))
+    // {
+    //     camera.handleMoveLeft();
+    // }
+    // if (key == GLFW_KEY_W && (action == GLFW_PRESS || action == GLFW_REPEAT))
+    // {
+    //     camera.handleMoveForward();
+    // }
+    // if (key == GLFW_KEY_S && (action == GLFW_PRESS || action == GLFW_REPEAT))
+    // {
+    //     camera.handleMoveBackward();
+    // }
     if (action == GLFW_PRESS)
     {
         Tetris3D.processInput(key);
     }
+}
+
+void mouseCallback(GLFWwindow *window, double xpos, double ypos)
+{
+    static bool firstMouse = true;
+    float lastX = 400, lastY = 300;
+    if (firstMouse)
+    {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+
+    processOffset(xpos, ypos);
+}
+
+void processOffset(double xpos, double ypos)
+{
+    static double lastX = xpos;
+    static double lastY = ypos;
+
+    double xoffset = xpos - lastX;
+    double yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+
+    lastX = xpos;
+    lastY = ypos;
+
+    camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
 void initOpenGLProgram(GLFWwindow *window)
@@ -136,6 +193,8 @@ void initOpenGLProgram(GLFWwindow *window)
     glfwSetErrorCallback(errorCallback);
     // Set the key callback
     glfwSetKeyCallback(window, keyCallback);
+    glfwSetCursorPosCallback(window, mouseCallback);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     // Set the window resize callback - resize is problematic
     // glfwSetWindowSizeCallback(window, windowResizeCallback);
 }

@@ -16,7 +16,7 @@ class Base
     glm::mat4 model;
     glm::mat4 view;
     glm::mat4 perspective;
-    Camera *camera;
+    Camera &camera;
     glm::vec4 color;
     Mesh *mesh;
     // unsigned verticesCount = 132;
@@ -26,6 +26,6 @@ public:
     unsigned int texture;
     glm::vec3 position;
 
-    Base(ShaderProgram shaderProgram, Camera *camera, Mesh *mesh);
+    Base(ShaderProgram shaderProgram, Camera &camera, Mesh *mesh);
     void draw();
 };

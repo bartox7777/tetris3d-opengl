@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-Game::Game(Camera *camera) : shaderProgram(nullptr), camera(camera), mesh(nullptr), time(0.0f)
+Game::Game(Camera &camera) : shaderProgram(nullptr), camera(camera), mesh(nullptr), time(0.0f)
 {
 }
 

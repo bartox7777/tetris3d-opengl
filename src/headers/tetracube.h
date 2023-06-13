@@ -21,7 +21,7 @@ public:
     std::vector<Cube *> cubes;
     void setCanMove(bool canMove);
     bool getCanMove();
-    Tetracube(ShaderProgram shaderProgram, Camera *camera, Mesh *mesh, TYPE type);
+    Tetracube(ShaderProgram shaderProgram, Camera &camera, Mesh *mesh, TYPE type);
     void draw();
     void moveDown(float units);
     void moveLeft(float units);

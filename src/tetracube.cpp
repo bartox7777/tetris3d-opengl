@@ -1,6 +1,6 @@
 #include "tetracube.h"
 
-Tetracube::Tetracube(ShaderProgram shaderProgram, Camera *camera, Mesh *mesh, TYPE type)
+Tetracube::Tetracube(ShaderProgram shaderProgram, Camera &camera, Mesh *mesh, TYPE type)
 {
     canMove = true;
     switch (type)

@@ -15,13 +15,13 @@ class Mesh
     glm::mat4 model;
     glm::mat4 view;
     glm::mat4 perspective;
-    Camera *camera;
+    Camera &camera;
     glm::vec4 color;
 
 public:
     const int width, height;
 
-    Mesh(ShaderProgram shaderProgram, Camera *camera, int width, int height);
+    Mesh(ShaderProgram shaderProgram, Camera &camera, int width, int height);
     void draw();
     int getMinY();
     int getMinX();

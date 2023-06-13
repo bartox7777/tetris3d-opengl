@@ -5,7 +5,7 @@
 // #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-Base::Base(ShaderProgram shaderProgram, Camera *camera, Mesh *mesh) : shaderProgram(shaderProgram), camera(camera), mesh(mesh)
+Base::Base(ShaderProgram shaderProgram, Camera &camera, Mesh *mesh) : shaderProgram(shaderProgram), camera(camera), mesh(mesh)
 {
     model = glm::mat4(1.0f);
     view = glm::mat4(1.0f);
@@ -75,12 +75,9 @@ void Base::draw()
     glUniform1i(shaderProgram.getUniformLocation("texture1"), 1);
 
     model = glm::mat4(1.0f);
-    glm::mat4 view = glm::lookAt(
-        camera->position,
-        camera->lookingAtPoint,
-        camera->upVector); // Wylicz macierz widoku
+    glm::mat4 view =camera.GetViewMatrix();
 
-    glm::mat4 projection = glm::perspective(camera->FOV, camera->aspect, camera->nearPlane, camera->farPlane); // Wylicz macierz rzutowania
+    glm::mat4 projection = camera.GetProjectionMatrix();
     glUniformMatrix4fv(shaderProgram.getUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(shaderProgram.getUniformLocation("perspective"), 1, GL_FALSE, glm::value_ptr(projection));
     glUniform4fv(shaderProgram.getUniformLocation("ocolor"), 1, glm::value_ptr(color));
